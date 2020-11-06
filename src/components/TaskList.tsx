@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { ITask, taskListState } from '../data/TaskList.recoil';
+import {Button, Form, InputGroup, Card} from 'react-bootstrap/';
 
 
 function TaskList(){
@@ -59,17 +60,26 @@ function TaskList(){
         <div className="task-list-container">
             <h1>To Do List</h1>
             <div className="task-list">
-                { taskList.map(( task, index ) => <div key={index} style={{ textAlign: 'left' }}>
-                    <input type="checkbox" onChange={onCheckTaskHandler(index)}/>
-                    <input type="textbox" value={task.description} onChange={onUpdateDescriptionHandler(index)}/>
-                    <button onClick={onDeleteTaskHandler(index)}>Delete Item</button>
-                </div> )}
+                { taskList.map(( task, index ) => <Card className="task-card" key={index} style={{ textAlign: 'left', margin: "5px", padding: "5px" }}>
+                            <InputGroup>
+                            <div className="newline">
+                            <Form.Control type="text" value={task.description} onChange={onUpdateDescriptionHandler(index)} placeholder="Your task here" />
+                            <Form.Text className="text-muted">You may change your task here</Form.Text>
+                            </div>
+                            <InputGroup.Checkbox onChange={onCheckTaskHandler(index)}/> Complete!
+                            </InputGroup>
+                            <Button  variant="warning" size="sm" onClick={onDeleteTaskHandler(index)}>Delete Item</Button>
+                     
+                </Card> )}
             </div>
 
-            <h1>Create To Do List Item</h1>
             <div className="task-create-form">
-                <textarea value={newTaskDescription} style={{ width: '100%', height:"150px" }} onChange={onChangeNewTaskDescription} />
-                <button onClick={onClickAdd}>Add to Task List</button>
+                <Form>
+                    <Form.Label>Create ToDo List Item</Form.Label>
+                    <textarea value={newTaskDescription} style={{ width: '100%', height:"150px" }} onChange={onChangeNewTaskDescription} />
+                    <Form.Text className="text-muted">Enter your items to do here.<br /> You can enter new items on multiple lines.</Form.Text>
+                </Form>
+                <Button variant='primary' onClick={onClickAdd}>Add to Task List</Button>
             </div>
         </div>
     );

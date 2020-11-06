@@ -1,21 +1,21 @@
 import React from 'react';
 import SimpleCounter from './components/SimpleCounter';
 import TaskList from './components/TaskList';
-import './App.css';
+import {Button, Container, Col} from 'react-bootstrap'; 
 import TaskListSummary from './components/TaskListSummary';
 
 function App() {
     
     return (
-        <div className="App">
-            <div style={{ width:"25%", float:"left" }}>{" "}</div>
-            <div style={{ width:"25%", float:"left" }}>
+        <Container className="App">
+            <Container style={{ width:"25%", float:"right" }}>{" "}</Container>
+            <Col style={{ width:"50%", float:"right" }}>
                 <TaskListSummary />
-            </div>
-            <div style={{ width:"25%", float:"left" }}>
+            </Col>
+            <Col className="col-32" style={{ width:"25%", float:"left" }}>
                 <TaskList />
-            </div>
-        </div>
+            </Col>
+        </Container>
     );
 }
 
